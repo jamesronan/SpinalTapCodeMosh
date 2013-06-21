@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>SpinalTapCodeMosh - Collaborative code paste binning</title>
+    [% if 0 %]
+    [% include 'minified-css.tt' %]
+    [% end %]
+    [% include 'css.tt' %]
+</head>
+<body>
+[% content %]
+[% if 0 %]
+[% include 'minified-js.tt' %]
+[% end %]
+[% include 'js.tt' %]
+<script type="text/javascript">$(function() { Mosh.jumpIn( $('body') ); });</script>
+</body>
+</html>

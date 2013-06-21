@@ -1,0 +1,41 @@
+/*
+ CSS for the SpinalTapCodeMosh App.
+*/
+
+body {
+    background: rgba(205,180,119,0.3);
+}
+
+h2 {
+    color:       rgba(0,0,0,0.6);
+    font-size:   26px;
+    line-height: 26px;
+}
+h3 {
+    color:       rgba(0,0,0,0.6);
+    font-size:   22px;
+    line-height: 22px;
+    text-align:  center;
+}
+
+#venue {
+    width:      100%;
+    margin:     5px auto;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+}
+
+#latest-moshes {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 250px;
+    height: 100%;
+    padding: 0px 5px 0px 5px;
+    border-right: 1px solid rgba(0,0,0,0.3);
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+}
+#dancefloor {
+    margin-left: 290px;
+}
+
+
