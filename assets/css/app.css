@@ -3,25 +3,73 @@
 */
 
 body {
-    background: rgba(205,180,119,0.3);
+    color: rgba(100,100,100,1);
+    background: rgba(167,182,197,0.2);
 }
 
 h2 {
-    color:       rgba(0,0,0,0.6);
+    color:       rgba(100,100,100,1);
     font-size:   26px;
     line-height: 26px;
 }
 h3 {
-    color:       rgba(0,0,0,0.6);
+    color:       rgba(100,100,100,1);
     font-size:   22px;
     line-height: 22px;
     text-align:  center;
 }
+h4 {
+    color:       rgba(100,100,100,1);
+}
+form {
+    position: relative;
+}
+label {
+    display: inline;
+    float: left;
+    width: 140px;
+    height: 23px;
+    vertical-align: middle;
+}
+input, textarea, select {
+    margin: 0px 0px 10px 0px !important;
+}
+label.subject {
+    width: 75px;
+}
+input.subject {
+    width: 825px;
+}
+textarea {
+    width: 900px;
+    height: 350px;
+    font-family: monospace;
+    background: #fff url(/img/the-pitt.png) no-repeat center center;
+}
+label.error {
+    position: absolute;
+    right: 40px;
+    width: 300px;
+    padding: 4px 10px 2px 15px;
+    color: #b94a48;
+    border: 1px solid #b94a48;
+    background: #f2dede;
+    -webkit-border-radius: 5px;
+    -moz-border-radius:    5px;
+    -o-border-radius:      5px;
+    border-radius:         5px;
+    -webkit-border-bottom-left-radius: 25px 15px;
+    -moz-border-bottom-left-radius:    25px 15px;
+    -o-border-bottom-left-radius:      25px 15px;
+    border-bottom-left-radius:         25px 15px;
+    -webkit-border-top-left-radius:    25px 15px;
+    -moz-border-top-left-radius:       25px 15px;
+    -o-border-top-left-radius:         25px 15px;
+    border-top-left-radius:            25px 15px;
 
-#venue {
-    width:      100%;
-    margin:     5px auto;
-    box-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+}
+#dancefloor {
+    margin-left: 290px;
 }
 
 #latest-moshes {
@@ -30,12 +78,94 @@ h3 {
     left: 0px;
     width: 250px;
     height: 100%;
-    padding: 0px 5px 0px 5px;
+    padding: 0px;
     border-right: 1px solid rgba(0,0,0,0.3);
     box-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
-#dancefloor {
-    margin-left: 290px;
+
+#latest-mosh-list {
+    width: 100%;
+    margin:  0px;
+    padding: 0px;
+    list-style: none;
+    border: none;
+}
+#latest-mosh-list li {
+    margin: 0px;
+    padding: 4px;
+    border-bottom: 1px solid rgba(190,190,190,1);
+    box-shadow: 1px 0px 2px rgba(60,60,60,1);
+}
+#latest-mosh-list li:hover {
+    background: rgba(0,0,0,0.1);
+}
+#latest-mosh-list li a,
+#latest-mosh-list li a:hover {
+    text-decoration: none;
+}
+#latest-mosh-list li h3 {
+    margin: 2px 0px 0px 5px;
+    padding: 0px;
+    text-align: left;
+    font-size: 15px;
+}
+#latest-mosh-list li h3 span {
+    font-size: 12px;
+    color: rgba(0,0,0,0.5);
+}
+#latest-mosh-list li h4 {
+    padding: 0px;
+    margin: 0px 0px 0px 5px;
+    text-align: left;
+    font-size: 12px;
+    color: rgba(0,0,0,0.8);
+}
+
+#createnewmosh {
+    margin: 10px 0px -5px 50px;
+}
+
+#moshpit {
+    position: relative;
+    margin: 20px 0px 0px 0px;
+}
+
+#moshpit h3 {
+    position: absolute;
+    top: 0px;
+    right: 75px;
+    margin: 0px;
+    font-size: 14px;
+    text-align: right;
+    color: rgba(100,100,100,0.6);
+}
+
+#moshpit section h4 {
+    display: inline;
+    float: left;
+    width: 100px;
+    font-size: 15px;
+    margin: 0px;
+    padding: 0px;
+}
+#moshpit div.mosh {
+    position: relative;
+    margin: 20px 0px 20px 0px;
+    padding: 10px 0px 0px 0px;
+    width: 900px;
+    height: 400px;
+    border: 1px solid rgba(0,0,0,0.7);
+    background: rgba(255,255,255,1);
+    color: rgba(40,40,40,1);
+}
+#moshpit div.mosh .syntax {
+    position: absolute;
+    top: 2px;
+    right: 0px;
+    padding: 0px 10px;
+    color: rgba(40,40,40,0.6);
 }
 
 

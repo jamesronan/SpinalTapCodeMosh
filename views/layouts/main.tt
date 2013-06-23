@@ -1,19 +1,23 @@
+[%- set dev = 0 -%]
 <!doctype html>
 <html>
 <head>
     <meta charset="utf-8">
     <title>SpinalTapCodeMosh - Collaborative code paste binning</title>
-    [% if 0 %]
-    [% include 'minified-css.tt' %]
-    [% end %]
+[% if dev == 1 -%]
     [% include 'css.tt' %]
+[%- else -%]
+    [% include 'minified-css.tt' %]
+[%- end %]
 </head>
 <body>
 [% content %]
-[% if 0 %]
-[% include 'minified-js.tt' %]
-[% end %]
+[%- include 'mustache-templates.tt' -%]
+[% if dev == 1 -%]
 [% include 'js.tt' %]
+[%- else -%]
+[% include 'minified-js.tt' %]
+[%- end %]
 <script type="text/javascript">$(function() { Mosh.jumpIn( $('body') ); });</script>
 </body>
 </html>

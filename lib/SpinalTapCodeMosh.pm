@@ -10,7 +10,7 @@ our $VERSION = '0.1';
 post '/mosh' => sub {
     set 'serializer' => 'JSON';
     my @mosh_fields = qw( data syntax poster subject );
-    my %data = map { $_ => param->{$_} }
+    my %data = map  { $_ => params->{$_} }
                grep { $_ ~~ \@mosh_fields } keys params('body');
 
     $data{id} = Data::UUID->new->create_str; # We want a unique ID too.

@@ -1,9 +1,10 @@
 <section id="latest-moshes">
-    <h3>Latest Moshes<h3>
+    <a href="/" id="createnewmosh" class="btn">Create New Mosh</a>
+    <hr>
+    <h3>Latest Moshes</h3>
     <ul id="latest-mosh-list"></ul>
 </section>
 <section id="dancefloor">
-    <h2>Code Mosh</h2>
+    <h2>Spinal:Tap:Code:Mosh</h2>
     <section id="moshpit"></section>
 </section>
-

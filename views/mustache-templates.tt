@@ -1,0 +1,68 @@
+<script type="text/x-mustashe-template" id="template-latest-mosh-item">
+    <a href="/{{ id }}">
+        <h3>{{ poster }} <span>- {{ age }}</span></h3>
+        <h4>{{ subject }}</h4>
+    </a>
+</script>
+<script type="text/x-mustashe-template" id="template-mosh">
+    <h3>Mosh {{id}}<br>{{created}}</h3>
+    <section><h4>Title:</h4>{{subject}}</section>
+    <section><h4>Posted by:</h4>{{poster}}</section>
+    <div class="mosh">
+    <pre>
+    {{data}}
+    </pre>
+    <span class="syntax">Syntax: {{syntax}}</span>
+    </div>
+</script>
+<script type="text/x-mustashe-template" id="template-new-mosh">
+    <form id="moshfrm" name="moshfrm" class="form-horizontal">
+    <legend>Create a new mosh</legend>
+    <label for="subject" class="subject">Title:</label>
+    <input type="text" id="subject" name="subject" class="subject" value="">
+    <br>
+    <textarea name="data"></textarea>
+    <br>
+    <label for="syntax">Syntax Hilighting:</label>
+    <select name="syntax" id="syntax">
+        <option value="">None</option>
+        <option value="plain">Plain / Text</option>
+        <option value="perl">Perl</option>
+        <option value="js">Javascript</option>
+        <option value="plain">----------</option>
+        <option value="as3">ActionScript</option>
+        <option value="bash">Bash / Shell</option>
+        <option value="coldfusion">ColdFusion</option>
+        <option value="csharp">C#</option>
+        <option value="cpp">C/C++</option>
+        <option value="css">CSS</option>
+        <option value="delphi">Delphi</option>
+        <option value="diff">Diff / Patch</option>
+        <option value="erlang">Erlang</option>
+        <option value="groovy">Groovy</option>
+        <option value="html">HTML</option>
+        <option value="js">Javascript</option>
+        <option value="java">Java</option>
+        <option value="javafx">JavaFX</option>
+        <option value="pascal">Pascal</option>
+        <option value="perl">Perl</option>
+        <option value="php">PHP</option>
+        <option value="plain">Plain / Text</option>
+        <option value="powershell">PowerShell</option>
+        <option value="python">Python</option>
+        <option value="ruby">Ruby</option>
+        <option value="scala">Scala</option>
+        <option value="sql">SQL</option>
+        <option value="vb">Visual Basic</option>
+        <option value="xml">XML</option>
+    </select>
+    <br>
+    <label for="poster">Name:</label>
+    <input type="text" id="poster" name="poster" placeholder="Guest" value="">
+    <br>
+    <button type="submit" id="submit" name="submit" class="btn btn-action" autocomplete="off"
+            data-loading-text="Posting" data-complete-text="Posted!" data-error-text="Failed :(">
+        Mosh!
+    </button>
+    </form>
+</script>
