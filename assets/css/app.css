@@ -12,6 +12,10 @@ h2 {
     font-size:   26px;
     line-height: 26px;
 }
+h2 span {
+    font-size: 15px;
+    color:       rgba(100,100,100,0.5);
+}
 h3 {
     color:       rgba(100,100,100,1);
     font-size:   22px;
