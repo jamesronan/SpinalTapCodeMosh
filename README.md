@@ -13,9 +13,9 @@ due to the components that power it.
 Prereqs
 -------
 
-Requires [Perl Dancer](http://perldancer.org), and it's 
+Requires [Perl Dancer](http://perldancer.org), and its 
 [Database Plugin](https://metacpan.org/module/Dancer::Plugin::Database), to run.  
-The app has several JS libs bundled in.  Please pay attention to the licencing on those 
+The app has several JS libs bundled in.  Please pay attention to the licensing on those 
 libs before you go hacking on that code :)
 
 
