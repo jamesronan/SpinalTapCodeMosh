@@ -100,7 +100,7 @@
         template: Mosh.template('latest-mosh-item'),
         render: function() {
             this.model.attributes.age
-                = moment( this.model.attributes.created ).fromNow();
+                = moment.utc( this.model.attributes.created ).fromNow();
             this.$el.html( this.template( this.model.attributes ) );
             return this;
         },

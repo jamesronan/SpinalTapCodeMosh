@@ -176,6 +176,8 @@ label.error {
     font-family: monospace;
     color: #222;
     background: #fff;
+    border: none;
+    outline: none;
 }
 
 
