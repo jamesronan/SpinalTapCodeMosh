@@ -12,7 +12,9 @@
     <pre>
     {{data}}
     </pre>
+    {{#syntax}}
     <span class="syntax">Syntax: {{syntax}}</span>
+    {{/syntax}}
     </div>
 </script>
 <script type="text/x-mustashe-template" id="template-new-mosh">
