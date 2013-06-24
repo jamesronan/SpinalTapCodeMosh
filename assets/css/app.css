@@ -171,5 +171,11 @@ label.error {
     padding: 0px 10px;
     color: rgba(40,40,40,0.6);
 }
+#moshpit div.mosh pre {
+    margin: 0px;
+    font-family: monospace;
+    color: #222;
+    background: #fff;
+}
 
 

@@ -33,8 +33,11 @@
             window.document.title
                 = this.model.attributes.subject + ' - SpinalTapCodeMosh';
             this.$el.html( this.template( this.model.attributes ) );
-            var classString = 'brush: ' + this.model.attributes.syntax;
-            this.$el.find('pre').addClass(classString);
+            if (this.model.attributes.syntax) {
+                this.$el.find('pre').addClass(
+                    'brush: ' + this.model.attributes.syntax
+                );
+            }
             return this;
         },
     });
