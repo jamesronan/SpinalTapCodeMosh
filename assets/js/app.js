@@ -30,6 +30,8 @@
     Mosh.Views.Mosh = Backbone.View.extend({
         template: Mosh.template('mosh'),
         render: function() {
+            window.document.title
+                = this.model.attributes.subject + ' - SpinalTapCodeMosh';
             this.$el.html( this.template( this.model.attributes ) );
             var classString = 'brush: ' + this.model.attributes.syntax;
             this.$el.find('pre').addClass(classString);
@@ -38,7 +40,9 @@
     });
     Mosh.Views.NewMosh = Backbone.View.extend({
         template: Mosh.template('new-mosh'),
+        windowTitle: 'SpinalTapCodeMosh - Collaborative code paste binning.',
         render: function() {
+            window.document.title = this.windowTitle;
             this.$el.html( this.template(this) );
             this.$el.find('form').validate({
                 rules: {
