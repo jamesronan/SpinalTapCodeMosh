@@ -61,6 +61,7 @@
     <br>
     <label for="poster">Name:</label>
     <input type="text" id="poster" name="poster" placeholder="Guest" value="">
+    <span><input type="checkbox" id="persistname" name="persistname"> Remember Me</span>
     <br>
     <button type="submit" id="submit" name="submit" class="btn btn-action" autocomplete="off"
             data-loading-text="Posting" data-complete-text="Posted!" data-error-text="Failed :(">

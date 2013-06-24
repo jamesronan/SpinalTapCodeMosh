@@ -13,9 +13,9 @@ due to the components that power it.
 Prereqs
 -------
 
-Requires [Perl Dancer](http://perldancer.org), and its 
-[Database Plugin](https://metacpan.org/module/Dancer::Plugin::Database), to run.  
-The app has several JS libs bundled in.  Please pay attention to the licensing on those 
+Requires [Perl Dancer](http://perldancer.org), and its
+[Database Plugin](https://metacpan.org/module/Dancer::Plugin::Database), to run.
+The app has several JS libs bundled in.  Please pay attention to the licensing on those
 libs before you go hacking on that code :)
 
 
@@ -28,7 +28,8 @@ people's work. I just moshed it all together with voodoo of my own.
 * [Backbone](http://backbonejs.org)
 * [Underscore](http://underscorejs.org)
 * [jQuery](http://jquery.com/)
-* [jQuery's Validation Plugin](http://jqueryvalidation.org/)
+* [jQuery Validation Plugin](http://jqueryvalidation.org/)
+* [jQuery Cookie Plugin](http://plugins.jquery.com/jcookie/)
 * [Twitter's Bootstrap](http://twitter.github.io/bootstrap/)
 * [Moment.js](http://momentjs.com/)
 * [Mustache Templates](http://mustache.github.io/)

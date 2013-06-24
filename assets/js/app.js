@@ -44,9 +44,28 @@
     Mosh.Views.NewMosh = Backbone.View.extend({
         template: Mosh.template('new-mosh'),
         windowTitle: 'SpinalTapCodeMosh - Collaborative code paste binning.',
+        events: {
+            'keyup input#poster': 'updateNameCookie',
+            'click input#persistname': 'updateNameCookie',
+        },
+        updateNameCookie: function() {
+            if (this.$el.find('input#persistname').prop('checked') === true) {
+                $.jCookie('poster', this.$el.find('input#poster').val()); // Set the cookie
+            } else {
+                $.jCookie('poster',null); // Delete the cookie.
+            }
+        },
         render: function() {
             window.document.title = this.windowTitle;
             this.$el.html( this.template(this) );
+
+            // Update the poster box and checkbox if we have a persistance
+            // cookie.
+            if ($.jCookie('poster')) {
+                this.$el.find('input#poster').val($.jCookie('poster'));
+                this.$el.find('input#persistname').attr('checked','checked');
+            }
+
             this.$el.find('form').validate({
                 rules: {
                     subject: { required: 1 },
