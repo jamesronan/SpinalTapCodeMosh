@@ -13,9 +13,10 @@ due to the components that power it.
 Prereqs
 -------
 
-Requires Perl Dancer, and it's Database Plugin, to run.  The app has several JS
-libs bundled in.  Please pay attention to the licencing on those libs before
-you go hacking on that code :)
+Requires [Perl Dancer](http://perldancer.org), and it's 
+[Database Plugin](https://metacpan.org/module/Dancer::Plugin::Database), to run.  
+The app has several JS libs bundled in.  Please pay attention to the licencing on those 
+libs before you go hacking on that code :)
 
 
 JS Libs (Bundled within)
@@ -38,7 +39,7 @@ Persistance
 
 Comes bundled with a SQLite DB for the moshes. But can be tweaked to use a
 MySQL/Postgres/Oracle DB backend, should you wish. See the
-[Dancer::Plugin::Database](http://https://metacpan.org/module/Dancer::Plugin::Database)
+[Dancer::Plugin::Database](https://metacpan.org/module/Dancer::Plugin::Database)
 docs for how to do that.
 
 
