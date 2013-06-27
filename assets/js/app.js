@@ -29,16 +29,100 @@
 
     Mosh.Views.Mosh = Backbone.View.extend({
         template: Mosh.template('mosh'),
+        events: {
+            'click .gutter div.line': 'updateHighlightingList'
+        },
         render: function() {
             window.document.title
                 = this.model.attributes.subject + ' - SpinalTapCodeMosh';
             this.$el.html( this.template( this.model.attributes ) );
+
+            // Update the highlighting based on the anchor hash. First off, if
+            // we've been gven a anchor hash and there is no syntax highlighting,
+            // then turn it on
+            if (   window.location.hash.slice(1)
+                && this.model.attributes.syntax == '') {
+                this.model.attributes.syntax = 'text';
+            }
+            this.setLineHighlight();
             if (this.model.attributes.syntax) {
                 this.$el.find('pre').addClass(
-                    'brush: ' + this.model.attributes.syntax
+                    'brush: ' + this.model.attributes.syntax + ';'
                 );
             }
             return this;
+        },
+        setLineHighlight: function() {
+            // Check for line ranges.
+            var lines = this.getAnchorHashLineNumbers();
+            if (lines) {
+                var highlightString = '[' + lines.toString() + ']';
+                this.$el.find('pre').addClass(
+                    'highlight: ' + highlightString + ';'
+                );
+                // Update the anchor hash, so everything is ascending and ranged.
+                this.updateAnchor(lines);
+            }
+
+        },
+        updateHighlightingList: function(clickEvent) {
+            // Change the highlighting of the clicked line, and update the anchor
+            // hash list.
+            var line          = $(clickEvent.target).text();
+            var anchorLines   = this.getAnchorHashLineNumbers();
+            var element       = $('div.line.number'+line);
+            var isHighlighted = element.hasClass('highlighted');
+            element.toggleClass('highlighted');
+            if (isHighlighted) {
+                anchorLines = _.without(anchorLines, line);
+            } else {
+                anchorLines.push(line);
+            }
+            console.log(anchorLines);
+            this.updateAnchor(anchorLines);
+        },
+        getAnchorHashLineNumbers: function() {
+            if ( !window.location.hash ) { return [] };
+            return _.map(
+                window.location.hash.slice(1).split(/,/),
+                function(line) {
+                    if (line.match(/:/)) {
+                        var range = line.split(/:/);
+                        return _.range(
+                            parseInt(range[0]),
+                            parseInt(range[1]) + 1
+                        ).toString();
+                    } else {
+                        return line;
+                    }
+                }
+            ).toString().split(/,/);
+        },
+        updateAnchor: function(lines) {
+            var ranges = this.contractToRanges(lines);
+            window.location.hash = ranges.join(',');
+        },
+
+        // Robbed this from Stackoverflow, (tweaked slightly) so credit where due:
+        // http://stackoverflow.com/questions/2270910/how-to-convert-sequence-of-numbers-in-an-array-to-range-of-numbers
+        contractToRanges: function(lines) {
+            console.log("contracting ranges");
+            console.log(lines);
+            lines.sort(function(a,b) {
+                return Number(a) - Number(b);
+            });
+            console.log(lines);
+            var ranges = [], rstart, rend;
+            for (var i = 0; i < lines.length; i++) {
+                rstart = lines[i];
+                rend   = rstart;
+                while (lines[i + 1] - lines[i] == 1) {
+                    rend = lines[i + 1];
+                    i++;
+                }
+                ranges.push(rstart == rend ? rstart + '' : rstart + ':' + rend);
+            }
+            return ranges;
         },
     });
     Mosh.Views.NewMosh = Backbone.View.extend({
