@@ -9,9 +9,7 @@
     <section><h4>Title:</h4>{{subject}}</section>
     <section><h4>Posted by:</h4>{{poster}}</section>
     <div class="mosh">
-    <pre>
-    {{data}}
-    </pre>
+    <pre>{{data}}</pre>
     {{#syntax}}
     <span class="syntax">Syntax: {{syntax}}</span>
     {{/syntax}}
