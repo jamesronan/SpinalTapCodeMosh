@@ -4,6 +4,14 @@
         <h4>{{ subject }}</h4>
     </a>
 </script>
+<script type="text/x-mustashe-template" id="template-no-mosh">
+    <h4>Hey?! Who turned off the music?!</h4>
+    <div class="notfoundtext">
+        <p>Hmm, seems as though the Mosh ID you've specified doesn't exists.</p>
+        <p>Double check it, and try to Mosh again! \m/</p>
+    </div>
+    <p><a href="/" class="btn">Create a new mosh</a></p>
+</script>
 <script type="text/x-mustashe-template" id="template-mosh">
     <h3>Mosh {{id}}<br>{{created}}</h3>
     <section><h4>Title:</h4>{{subject}}</section>

@@ -179,5 +179,8 @@ label.error {
     border: none;
     outline: none;
 }
+#moshpit div.notfoundtext {
+    margin: 20px 0px 20px 0px;
+}
 
 

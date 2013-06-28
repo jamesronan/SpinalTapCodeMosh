@@ -27,6 +27,13 @@
         },
     });
 
+    Mosh.Views.NoMosh = Backbone.View.extend({
+        template: Mosh.template('no-mosh'),
+        render: function() {
+            this.$el.html( this.template( this ) );
+            return this;
+        },
+    });
     Mosh.Views.Mosh = Backbone.View.extend({
         template: Mosh.template('mosh'),
         events: {
@@ -106,12 +113,9 @@
         // Robbed this from Stackoverflow, (tweaked slightly) so credit where due:
         // http://stackoverflow.com/questions/2270910/how-to-convert-sequence-of-numbers-in-an-array-to-range-of-numbers
         contractToRanges: function(lines) {
-            console.log("contracting ranges");
-            console.log(lines);
             lines.sort(function(a,b) {
                 return Number(a) - Number(b);
             });
-            console.log(lines);
             var ranges = [], rstart, rend;
             for (var i = 0; i < lines.length; i++) {
                 rstart = lines[i];
@@ -180,10 +184,7 @@
                             button.removeClass('btn-success btn-danger')
                                   .addClass('btn-success');
                             button.button('complete');
-                            Mosh.router.navigate(
-                                '/'+data.mosh.id,
-                                { trigger: true }
-                            );
+                            Mosh.router.navigate('/'+data.mosh.id, true);
                             Mosh.router.latestMoshCollection.trigger('latestMosh:update');
                         },
                         error: function() {
@@ -235,8 +236,9 @@
             });
         },
         routes: {
-            "":    "newMosh",
-            ":id": "showMosh",
+            "":         "newMosh",
+            "notfound": "noMosh",
+            ":id":      "showMosh",
         },
         newMosh: function() {
             var newMosh = new Mosh.Views.NewMosh;
@@ -250,9 +252,13 @@
                     Mosh.router.updateMoshPit(moshView);
                 },
                 error: function() {
-                    Mosh.router.navigate('/notfound');
+                    Mosh.router.navigate('/notfound', true);
                 },
             });
+        },
+        noMosh: function() {
+            var noMoshView = new Mosh.Views.NoMosh;
+            this.updateMoshPit(noMoshView);
         },
         updateMoshPit: function(moshView) {
             var moshPit = $(this.el).find('#moshpit');
