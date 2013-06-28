@@ -2,10 +2,37 @@ package SpinalTapCodeMosh;
 use Dancer ':syntax';
 use Dancer::Plugin::Database;
 
+use LWP::UserAgent qw();
 use Data::UUID;
 use HTTP::Status qw(:constants);
 
 our $VERSION = '0.1';
+
+post '/irc' => sub {
+    set 'serializer' => 'JSON';
+    my %settings  = setting('IRC');
+    my $mosh_data = params->{mosh};
+    my $server = uri_for('/');
+
+    my $url  = uri_for('/'.$mosh_data->{id});
+    my $message = $settings{message};
+    $message =~ s/\$url/$url/;
+    $message =~ s/\$title/$mosh_data->{subject}/;
+
+    my $ua = LWP::UserAgent->new();
+    my $response = $ua->get(
+        $settings{url},
+        channel => params->{channel},
+        message => $message,
+    );
+
+    if (!$response->is_success) {
+        status 422;
+        return halt({ failed => 1 });
+    }
+
+    return { ok => 1 };
+};
 
 post '/mosh' => sub {
     set 'serializer' => 'JSON';

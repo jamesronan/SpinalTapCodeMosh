@@ -26,4 +26,9 @@ plugins:
         driver:   SQLite
         database: 'db/mosh.sqlite'
 
+IRC:
+#    url:      'http://irc.uk2.net:6500/'
+    url:      'http://127.0.0.1:6500/'
+    message:  'New Mosh: $url - $title'
+    channels: [ devs, cpdevs, tech, permies ]
 

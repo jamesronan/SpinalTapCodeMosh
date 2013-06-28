@@ -144,6 +144,7 @@
             }
         },
         render: function() {
+            var view = this;
             window.document.title = this.windowTitle;
             this.$el.html( this.template(this) );
 
@@ -152,6 +153,13 @@
             if ($.jCookie('poster')) {
                 this.$el.find('input#poster').val($.jCookie('poster'));
                 this.$el.find('input#persistname').attr('checked','checked');
+            }
+
+            // Add the toggle for the "IRC announce, if it exists.
+            if (this.$el.find('input#ircannounce').length) {
+                this.$el.find('input#ircannounce').click(function(e) {
+                    $('span#channels').toggleClass('hidden');
+                });
             }
 
             this.$el.find('form').validate({
@@ -184,6 +192,13 @@
                             button.removeClass('btn-success btn-danger')
                                   .addClass('btn-success');
                             button.button('complete');
+
+                            // If we created the new mosh, then we need to announce it.
+                            // Obviously this will only do something if there was an IRC
+                            // annouce field, which would only exist if the app config
+                            // dictates.
+                            view.IRCAnnounce(form, data);
+
                             Mosh.router.navigate('/'+data.mosh.id, true);
                             Mosh.router.latestMoshCollection.trigger('latestMosh:update');
                         },
@@ -197,6 +212,38 @@
                 },
             });
             return this;
+        },
+        IRCAnnounce: function(form, data) {
+            if ($(form.ircannounce).length === 0) {
+                console.log("Couldn't see an IRC announce checkbox");
+                return; // Make sure we have the field, bail if not.
+            }
+
+            // If we have the field, then there is config for sending, so punt
+            // the annoucement out to IRC using the webhook.
+            if ($(form.ircannounce).prop('checked') === true) {
+
+                // Go through the checkboxes and grab a list of the ones that
+                // are checked.
+                var channels = [];
+                $(form).find('.channel:checked').each(function(idx, checkbox) {
+                    channels.push( $(checkbox).attr('name') );
+                });
+
+                // For every channel, send the message.
+                _.each(channels, function(channel) {
+                    $.ajax({
+                        method: 'post',
+                        url:    '/irc',
+                        data: {
+                            "channel": channel,
+                            "mosh":    data.mosh,
+                        },
+                        success: function() { console.log('Sent ok to '+channel) }, // We don't care if we could
+                        error:   function() { console.log('Send failed to'+channel) }, // send it or not.
+                    });
+                });
+            }
         },
     });
     Mosh.Views.LatestMosh = Backbone.View.extend({

@@ -38,6 +38,9 @@ label {
 input, textarea, select {
     margin: 0px 0px 10px 0px !important;
 }
+input[type="checkbox"] {
+    margin: 0px 0px 0px 0px !important;
+}
 label.subject {
     width: 75px;
 }
@@ -70,12 +73,24 @@ label.error {
     -moz-border-top-left-radius:       25px 15px;
     -o-border-top-left-radius:         25px 15px;
     border-top-left-radius:            25px 15px;
+}
+label.inline {
+    float: none !important;
 
 }
+form span {
+    padding: 0px 0px 0px 5px;
+}
+form span#channels {
+    padding: 0px 0px 0px 30px;
+}
+form span#channels span {
+    padding: 2px 10px 0px 0px !important;
+}
+
 #dancefloor {
     margin-left: 290px;
 }
-
 #latest-moshes {
     position: fixed;
     top: 0px;

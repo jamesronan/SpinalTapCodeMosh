@@ -69,6 +69,17 @@
     <input type="text" id="poster" name="poster" placeholder="Guest" value="">
     <span><input type="checkbox" id="persistname" name="persistname"> Remember Me</span>
     <br>
+[% IF settings.IRC -%]
+    <label for="ircannounce">Announce via IRC:</label>
+    <span><input type="checkbox" id="ircannounce" name="ircannounce" value=""></span>
+    <span id="channels" class="hidden">
+[% FOREACH channel IN settings.IRC.channels -%]
+        <label for="channel-[% channel %]" class="inline">[% channel %]</label>
+        <span><input type="checkbox" name="[% channel %]" class="channel" value="[% channel %]"></span>
+[% END %]
+    </span>
+    <br><br>
+[%- END %]
     <button type="submit" id="submit" name="submit" class="btn btn-action" autocomplete="off"
             data-loading-text="Posting" data-complete-text="Posted!" data-error-text="Failed :(">
         Mosh!
