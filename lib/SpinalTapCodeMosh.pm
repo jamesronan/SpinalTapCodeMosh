@@ -14,6 +14,18 @@ our $VERSION = '0.1';
 post '/irc' => sub {
     set 'serializer' => 'JSON';
     my %settings  = %{ setting('IRC') };
+
+    # Prevent this being used if it wasn't configured in the app.
+    if (   !%settings
+        || !defined($settings{url})
+        || !defined($settings{message})
+        || !defined($settings{channels})
+        )
+    {
+        status HTTP_FORBIDDEN;
+        return halt({ not_configured => 1 });
+    }
+
     my %mosh_data = %{ JSON->new->decode(params->{mosh}) };
 
     my $url  = uri_for('/'.$mosh_data{id});
