@@ -26,9 +26,11 @@ plugins:
         driver:   SQLite
         database: 'db/mosh.sqlite'
 
+# Setting this will display an "Announce to IRC" box on the new mosh form.
+# STCM will "GET" the specified URL with the params channel and message upon
+# submission with the Announce to IRC option checked.
 IRC:
-#    url:      'http://irc.uk2.net:6500/'
-    url:      'http://127.0.0.1:6500/'
-    message:  'New Mosh: $url - $title'
-    channels: [ devs, cpdevs, tech, permies ]
+    url:      'http://my_irc_web_hook/'            # IRC Webhook URL.
+    message:  'New Mosh by $poster: $url - $title' # The message that will be posted to the channel via the webhook
+    channels: [ mychannel, anotherchannel ]        # A list of channel options that will be presented in the new mosh form.
 

@@ -2,31 +2,31 @@ package SpinalTapCodeMosh;
 use Dancer ':syntax';
 use Dancer::Plugin::Database;
 
-use LWP::UserAgent qw();
+use LWP::Simple qw();
 use Data::UUID;
 use HTTP::Status qw(:constants);
+use JSON qw();
+use Digest::SHA1 qw();
+use URI::Escape qw();
 
 our $VERSION = '0.1';
 
 post '/irc' => sub {
     set 'serializer' => 'JSON';
-    my %settings  = setting('IRC');
-    my $mosh_data = params->{mosh};
-    my $server = uri_for('/');
+    my %settings  = %{ setting('IRC') };
+    my %mosh_data = %{ JSON->new->decode(params->{mosh}) };
 
-    my $url  = uri_for('/'.$mosh_data->{id});
+    my $url  = uri_for('/'.$mosh_data{id});
     my $message = $settings{message};
     $message =~ s/\$url/$url/;
-    $message =~ s/\$title/$mosh_data->{subject}/;
+    $message =~ s/\$poster/$mosh_data{poster}/;
+    $message =~ s/\$title/$mosh_data{subject}/;
 
-    my $ua = LWP::UserAgent->new();
-    my $response = $ua->get(
-        $settings{url},
-        channel => params->{channel},
-        message => $message,
-    );
-
-    if (!$response->is_success) {
+    if (!LWP::Simple::get(
+            sprintf '%s?channel=%s&message=%s',
+                $settings{url}, params->{channel}, URI::Escape::uri_escape($message)
+        ))
+    {
         status 422;
         return halt({ failed => 1 });
     }
@@ -40,7 +40,9 @@ post '/mosh' => sub {
     my %data = map  { $_ => params->{$_} }
                grep { $_ ~~ \@mosh_fields } keys params('body');
 
-    $data{id} = Data::UUID->new->create_str; # We want a unique ID too.
+    # We want a unique ID, which isn't as long as a Donkey's cock.
+    $data{id}
+        = substr Digest::SHA1::sha1_hex( Data::UUID->new->create_str ), 0, 10;
     my $inserted = database->quick_insert('moshes', \%data);
 
     my $return_data = { created => $inserted };

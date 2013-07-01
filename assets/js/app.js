@@ -233,14 +233,14 @@
                 // For every channel, send the message.
                 _.each(channels, function(channel) {
                     $.ajax({
-                        method: 'post',
-                        url:    '/irc',
+                        type: 'post',
+                        url:  '/irc',
                         data: {
                             "channel": channel,
-                            "mosh":    data.mosh,
+                            "mosh":    JSON.stringify(data.mosh),
                         },
-                        success: function() { console.log('Sent ok to '+channel) }, // We don't care if we could
-                        error:   function() { console.log('Send failed to'+channel) }, // send it or not.
+                        success: function() {}, // We don't care if we could
+                        error:   function() {}, // send it or not.
                     });
                 });
             }
