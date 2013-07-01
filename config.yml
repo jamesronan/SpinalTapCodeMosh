@@ -35,7 +35,8 @@ plugins:
 # message  - The message that will be posted to the channel via the webhook
 # channels - A list of channel options that will be presented in the new mosh form.
 IRC:
-    url:      'http://my_irc_web_hook_url.com/'
+    webhook:  'http://my_irc_web_hook_url.com/'
+    linkurl:  'http://spcm-instance-url.com/'
     message:  'New Mosh by $poster: $url - $title'
     channels: [ 'mychannel', 'anotherchannel' ]
 

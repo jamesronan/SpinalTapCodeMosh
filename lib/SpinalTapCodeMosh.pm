@@ -17,7 +17,8 @@ post '/irc' => sub {
 
     # Prevent this being used if it wasn't configured in the app.
     if (   !%settings
-        || !defined($settings{url})
+        || !defined($settings{webhook})
+        || !defined($settings{linkurl})
         || !defined($settings{message})
         || !defined($settings{channels})
         )
@@ -28,7 +29,7 @@ post '/irc' => sub {
 
     my %mosh_data = %{ JSON->new->decode(params->{mosh}) };
 
-    my $url  = uri_for('/'.$mosh_data{id});
+    my $url  = $settings{linkurl} . '/' . $mosh_data{id};
     my $message = $settings{message};
     $message =~ s/\$url/$url/;
     $message =~ s/\$poster/$mosh_data{poster}/;
@@ -36,7 +37,7 @@ post '/irc' => sub {
 
     if (!LWP::Simple::get(
             sprintf '%s?channel=%s&message=%s',
-                $settings{url}, params->{channel}, URI::Escape::uri_escape($message)
+                $settings{webhook}, params->{channel}, URI::Escape::uri_escape($message)
         ))
     {
         status 422;
