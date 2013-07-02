@@ -31,7 +31,7 @@
     <br>
     <textarea name="data"></textarea>
     <br>
-    <label for="syntax">Syntax Hilighting:</label>
+    <label for="syntax">Syntax Highlighting:</label>
     <select name="syntax" id="syntax">
         <option value="">None</option>
         <option value="plain">Plain / Text</option>
@@ -74,8 +74,8 @@
     <span><input type="checkbox" id="ircannounce" name="ircannounce" value=""></span>
     <span id="channels" class="hidden">
 [% FOREACH channel IN settings.IRC.channels -%]
-        <label for="channel-[% channel %]" class="inline">[% channel %]</label>
         <span><input type="checkbox" name="[% channel %]" class="channel" value="[% channel %]"></span>
+        <label for="channel-[% channel %]" class="inline">[% channel %]</label>
 [% END %]
     </span>
     <br><br>
