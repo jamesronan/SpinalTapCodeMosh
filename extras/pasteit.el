@@ -47,7 +47,7 @@
   "Spinal:Tap:Mode:Mosh server url"
   :group 'pasteit)
 
-(defcustom spinal-tap-code-mosh-irc-channels '("devs")
+(defcustom spinal-tap-code-mosh-irc-channels '("channel")
   "IRC channels to notify"
   :group 'pasteit)
 
