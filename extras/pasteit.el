@@ -124,6 +124,14 @@
    (concat spinal-tap-code-mosh-url
            (cdr (assoc 'id mosh-data)))))
 
+(defun notify-via-irc (channels mosh-data)
+  (dolist (channel spinal-tap-code-mosh-irc-channels)
+        (http-post (concat spinal-tap-code-mosh-url "irc")
+                   ;; TODO ability to choose IRC channels
+                   `(("channel" . ,channel) ;; hardcoded
+                     ("mosh" . ,(json-encode mosh-data))))
+      (message-mosh-url mosh-data)))
+
 (defun pasteit-region (start end)
   "Just send a selected region to Spinal:Tap:Mode:Mosh"
   (interactive "*r")
@@ -141,10 +149,7 @@
   "Send a selected region to Spinal:Tap:Mode:Mosh and notify people via IRC"
   (interactive "*r")
   (let ((mosh-data (pasteit-region start end)))
-    (http-post (concat spinal-tap-code-mosh-url "irc")
-               `(("channel" . ,(car spinal-tap-code-mosh-irc-channels)) ;; hardcoded (TODO ability to choose IRC channels)
-                 ("mosh" . ,(json-encode mosh-data))))
-    (message-mosh-url mosh-data)))
+    (notify-via-irc spinal-tap-code-mosh-irc-channels mosh-data)))
  
 (defun pasteit-buffer-irc ()
   "Send whole buffer to Spinal:Tap:Mode:Mosh and notify people via IRC"
