@@ -64,7 +64,7 @@
 
 (require 'url)
 (require 'url-http)
-(require 'json) ;; TODO get rid of it
+(require 'json)
 
 (defconst pasteit-version "0.01")
 
@@ -82,9 +82,8 @@
   "Send ARGS to URL as a POST request."
   (let ((url-request-method "POST")
         (url-request-extra-headers
-         '(("Content-Type" . "application/x-www-form-urlencoded; charset=UTF-8")
-           ;; ("X-Requested-With" ."XMLHttpRequest")
-           ))
+         '(("Content-Type" .
+            "application/x-www-form-urlencoded; charset=UTF-8")))
         (url-request-data
          (mapconcat (lambda (arg)
                       (concat (url-hexify-string (car arg))
@@ -135,9 +134,9 @@
 
 (defun pasteit (code)
   (http-post (concat spinal-tap-code-mosh-url "mosh")
-             `(("subject" . ,(ask-for-a-title)) ;; buffer name as a title (TODO specify own title)
+             `(("subject" . ,(ask-for-a-title)) ;; buffer name as a title
                ("data" . ,code)                 ;; selected code
-               ("poster" . ,(getenv "USER"))    ;; acting on behalf of current user ($USER)
+               ("poster" . ,(getenv "USER"))    ;; acting on behalf of $USER
                ("syntax" . ,(get-syntax)))))    ;; buffer's major mode
 
 (defun message-mosh-url (mosh-data)
@@ -162,7 +161,7 @@
     mosh-data))
 
 (defun pasteit-buffer ()
-  "Just send whole buffer to Spinal:Tap:Mode:Mosh"
+  "Just a send whole buffer to Spinal:Tap:Mode:Mosh"
   (interactive)
   (pasteit-region (point-min) (point-max)))
 
@@ -173,7 +172,7 @@
     (notify-via-irc spinal-tap-code-mosh-irc-channels mosh-data)))
  
 (defun pasteit-buffer-irc ()
-  "Send whole buffer to Spinal:Tap:Mode:Mosh and notify people via IRC"
+  "Send a whole buffer to Spinal:Tap:Mode:Mosh and notify people via IRC"
   (interactive)
   (pasteit-region-irc (point-min) (point-max)))
 
