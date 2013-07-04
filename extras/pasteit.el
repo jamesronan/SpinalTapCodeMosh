@@ -22,13 +22,40 @@
 ;; along with this program; if not, write to the Free Software
 ;; Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 
-;;; Commentary:
+;; Dependencies:
+;;
+;; - json package ( available from ELPA and easy to install.
+;; `M-x install-package` and type `json` )
 
-;; 
-
+;; Installation:
+;;
 ;; Put this file into your load-path and the following into your ~/.emacs:
 ;;   (require 'pasteit)
 ;;   (setq spinal-tap-code-mosh-url "http://spinal-tap-mode-mosh/")
+;;   (setq spinal-tap-code-mosh-irc-channels '("channel1" "channel2"))
+;;
+;; You can also load `pasteit.el` directly
+;;   (load-file "path/to/pasteit.el")
+;;
+
+;; Functions:
+;;
+;; M-x pasteit-region
+;;   to send a selected region to Spinal:Tap:Mode:Mosh
+;;
+;; M-x pasteit-buffer
+;;   to send whole buffer to Spinal:Tap:Mode:Mosh
+;;
+;; M-x pasteit-region-irc
+;;   to send a selected region to Spinal:Tap:Mode:Mosh and notify people via IRC
+;;
+;; M-x pasteit-buffer-irc
+;;   to send a whole buffer to Spinal:Tap:Mode:Mosh and notify people via IRC
+;;
+
+;; Note:
+;; All functions ask for a title. If you leave it empty, filename will be used
+;; as a title
 
 ;;; Code:
 
