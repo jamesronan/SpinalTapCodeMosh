@@ -112,12 +112,33 @@
   (let ((title (read-from-minibuffer "Title: ")))
     (if (string= "" title) (buffer-file-name) title)))
 
+(defun get-syntax ()
+  (let ((mode (with-current-buffer (current-buffer) major-mode)))
+    (cond ((or (eq mode 'cperl-mode)
+               (eq mode 'perl-mode)
+               (eq mode 'pod-mode)
+               (eq mode 'tt-mode)) "perl")
+          ((or (eq mode 'js-mode)
+               (eq mode 'js2-mode)) "js")
+          ((eq mode 'shell-script-mode) "bash")
+          ((eq mode 'css-mode) "bash")
+          ((eq mode 'diff-mode) "diff")
+          ((eq mode 'php-mode) "php")
+          ((eq mode 'python-mode) "python")
+          ((eq mode 'ruby-mode) "ruby")
+          ((eq mode 'sql-mode) "sql")
+          ((or (eq mode 'xml-mode)
+               (eq mode 'nxml-mode)) "xml")
+          ((or (eq mode 'html-mode)
+               (eq mode 'nxml-web-mode)) "html")
+          (t "plain"))))
+
 (defun pasteit (code)
   (http-post (concat spinal-tap-code-mosh-url "mosh")
              `(("subject" . ,(ask-for-a-title)) ;; buffer name as a title (TODO specify own title)
                ("data" . ,code)                 ;; selected code
                ("poster" . ,(getenv "USER"))    ;; acting on behalf of current user ($USER)
-               ("syntax" . "plain"))))          ;; hardcoded (TODO use buffer's major mode)
+               ("syntax" . ,(get-syntax)))))    ;; buffer's major mode
 
 (defun message-mosh-url (mosh-data)
   (message
