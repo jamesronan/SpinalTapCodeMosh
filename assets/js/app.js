@@ -138,7 +138,7 @@
         },
         updateNameCookie: function() {
             if (this.$el.find('input#persistname').prop('checked') === true) {
-                $.jCookie('poster', this.$el.find('input#poster').val()); // Set the cookie
+                $.jCookie('poster', this.$el.find('input#poster').val(), 365); // Set the cookie; For a year
             } else {
                 $.jCookie('poster',null); // Delete the cookie.
             }
