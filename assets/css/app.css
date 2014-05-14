@@ -149,18 +149,24 @@ form span#channels span {
 #moshpit {
     position: relative;
     margin: 20px 0px 0px 0px;
+    width: 825px;
 }
 
 #moshpit h3 {
     position: absolute;
     top: 0px;
-    right: 75px;
+    right: 22px;
     margin: 0px;
     font-size: 14px;
     text-align: right;
     color: rgba(100,100,100,0.6);
 }
-
+#moshpit button#get-raw {
+    position: absolute;
+    top: -50px;
+    right: 22px;
+    margin: 0px 0px 0px 0px !important;
+}
 #moshpit section h4 {
     display: inline;
     float: left;
