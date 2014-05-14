@@ -80,6 +80,26 @@ get  '/mosh/recent' => sub {
     return [ @moshes ];
 };
 
+# Add a route allowing people to see the content of moshes in it's raw form.
+get '/mosh/raw/:id' => sub {
+    my $mosh = database->quick_select(
+        'moshes',
+        {
+            id => params->{id}
+        }
+    );
+
+    if (!$mosh) {
+        status HTTP_NOT_FOUND;
+        return {};
+    }
+
+    # If we have a mosh, we need to set the content type to text/plain, then
+    # dump the mosh out.
+    header 'content-type' => 'text/plain';
+    return $mosh->{data};
+};
+
 get  '/mosh/:id'    => sub {
     set 'serializer' => 'JSON';
     my $mosh = database->quick_select(

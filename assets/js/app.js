@@ -57,6 +57,13 @@
                     'brush: ' + this.model.attributes.syntax + ';'
                 );
             }
+            // Attach a listen to the Raw Mosh button
+            var moshId = this.model.id;
+            this.$el.find('button#get-raw').click(function(e) {
+                e.preventDefault();
+                window.open('/mosh/raw/'+moshId, '_blank');
+            });
+
             return this;
         },
         setLineHighlight: function() {
@@ -85,7 +92,6 @@
             } else {
                 anchorLines.push(line);
             }
-            console.log(anchorLines);
             this.updateAnchor(anchorLines);
         },
         getAnchorHashLineNumbers: function() {

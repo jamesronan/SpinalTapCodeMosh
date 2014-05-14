@@ -1,14 +1,14 @@
 SpinalTapCodeMosh
 =================
 
-Yet another code-pastebin app powered by Dancer using the power of Backbone
+Yet another code-pastebin app; Powered by Dancer using the power of Backbone
 for the UI.
 
 Still has some bugs and missing features I want to add, but it's currently a
 working RC that I'll use and see what really needs fixing / adding.
 
 This has no affiliation with the band or any orthopedic procedures. Is so named
-due to the components that power it.
+due to the components that power it, and it's intended use.
 
 Prereqs
 -------
