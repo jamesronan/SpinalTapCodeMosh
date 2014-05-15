@@ -18,11 +18,25 @@
             this.id = options.id;
         },
     });
+    Mosh.Models.Expiry = Backbone.Model.extend({
+        initialize: function(options) {
+            this.id = options.id;
+            this.name = options.name;
+        },
+    });
+
     Mosh.Collections.LatestMoshes = Backbone.Collection.extend({
         model: Mosh.Models.CodeMosh,
         url: '/mosh/recent',
         initialize: function(options) {
             this.on('latestMosh:update', this.fetch,this);
+            this.fetch();
+        },
+    });
+    Mosh.Collections.Expiries = Backbone.Collection.extend({
+        model: Mosh.Models.Expiry,
+        url: '/mosh/expiries',
+        initialize: function(options) {
             this.fetch();
         },
     });
@@ -135,6 +149,22 @@
             return ranges;
         },
     });
+    Mosh.Views.Expiries = Backbone.View.extend({
+        template: Mosh.template('expiry-option'),
+        initialize: function(options) {
+            this.el = options.el;
+            this.listenTo(this.collection, 'reset', this.render);
+            this.collection.fetch();
+        },
+        render: function() {
+            this.$el.empty();
+            this.collection.forEach(function(expiryType) {
+                this.$el.append(this.template(expiryType));
+            },this);
+            // When we're done, check the "never"
+            this.$el.find('input[name=expiry][value=1]').prop('checked',true);
+        },
+    });
     Mosh.Views.NewMosh = Backbone.View.extend({
         template: Mosh.template('new-mosh'),
         windowTitle: 'SpinalTapCodeMosh - Collaborative code paste binning.',
@@ -153,6 +183,12 @@
             var view = this;
             window.document.title = this.windowTitle;
             this.$el.html( this.template(this) );
+
+            // Render the expiries options.
+            var expiryView = new Mosh.Views.Expiries({
+                el: view.$el.find('#expiry'),
+                collection: new Mosh.Collections.Expiries(),
+            });
 
             // Update the poster box and checkbox if we have a persistance
             // cookie.
@@ -193,6 +229,7 @@
                             data:    $(form.data).val() || 'None',
                             poster:  $(form.poster).val() || 'Guest',
                             syntax:  $(form.syntax).val(),
+                            expiry:  $(form).find('input[name=expiry]:checked').val(),
                         },
                         success: function(data) {
                             button.removeClass('btn-success btn-danger')
