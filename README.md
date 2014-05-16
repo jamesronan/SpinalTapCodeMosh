@@ -4,11 +4,16 @@ SpinalTapCodeMosh
 Yet another code-pastebin app; Powered by Dancer using the power of Backbone
 for the UI.
 
-Still has some bugs and missing features I want to add, but it's currently a
-working RC that I'll use and see what really needs fixing / adding.
+The app has been used in anger for a fair while now, and seems to work well.
+With the additional features I've added, I'm happy to call it at a working
+release stage: v1.0.
 
-This has no affiliation with the band or any orthopedic procedures. Is so named
-due to the components that power it, and it's intended use.
+There are a couple of features that it could do with, which you can see under
+the issues section. I'll look into those in due course. Feel free to raise
+issues for problems you find / features you'd like (PR's are even nicer!)
+
+This application has no affiliation with the band or any orthopedic procedures.
+It is so named due to the components that power it, and it's intended use :).
 
 Prereqs
 -------
