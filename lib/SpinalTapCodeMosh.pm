@@ -4,12 +4,13 @@ use Dancer::Plugin::Database;
 
 use LWP::Simple qw();
 use Data::UUID;
+use DateTime;
 use HTTP::Status qw(:constants);
 use JSON qw();
 use Digest::SHA1 qw();
 use URI::Escape qw();
 
-our $VERSION = '0.1';
+our $VERSION = '1.0';
 
 post '/irc' => sub {
     set 'serializer' => 'JSON';
@@ -49,14 +50,19 @@ post '/irc' => sub {
 
 post '/mosh' => sub {
     set 'serializer' => 'JSON';
-    my @mosh_fields = qw( data syntax poster subject );
+    my @mosh_fields = qw( data syntax poster subject expiry );
     my %data = map  { $_ => params->{$_} }
                grep { $_ ~~ \@mosh_fields } keys params('body');
+
+    # Set the created datetime to be the local one.
+    my $dt_now = DateTime->now( time_zone => 'local' );
+    $data{created} = $dt_now->ymd . " " . $dt_now->hms;
 
     # We want a unique ID, which isn't as long as a Donkey's cock.
     $data{id}
         = substr Digest::SHA1::sha1_hex( Data::UUID->new->create_str ), 0, 10;
     my $inserted = database->quick_insert('moshes', \%data);
+
 
     my $return_data = { created => $inserted };
     if ($inserted) {
@@ -65,6 +71,12 @@ post '/mosh' => sub {
         status HTTP_INTERNAL_SERVER_ERROR;
     }
     return $return_data;
+};
+
+get '/mosh/expiries' => sub {
+    set 'serializer' => 'JSON';
+    my @expiries = database->quick_select('expiry', {});
+    return [ @expiries ];
 };
 
 get  '/mosh/recent' => sub {
@@ -102,13 +114,14 @@ get '/mosh/raw/:id' => sub {
 
 get  '/mosh/:id'    => sub {
     set 'serializer' => 'JSON';
-    my $mosh = database->quick_select(
-        'moshes',
-        {
-            id => params->{id}
-        }
-    );
-
+    my $sth = database->prepare(<<SQL) or die("Bugger: ". database->errstr);
+SELECT m.id, m.poster, m.subject, m.data, m.created, e.name as expiry
+FROM     moshes as m
+    JOIN expiry as e ON (m.expiry = e.id)
+WHERE m.id = ?
+SQL
+    $sth->execute(params->{id});
+    my $mosh = $sth->fetchrow_hashref;
     if (!$mosh) {
         status HTTP_NOT_FOUND;
         return {};

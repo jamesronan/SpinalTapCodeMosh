@@ -44,3 +44,27 @@ MySQL/Postgres/Oracle DB backend, should you wish. See the
 docs for how to do that.
 
 
+Release 1.0
+-----------
+
+With release 1.0 comes a couple of new features such as raw mosh viewing and
+mosh expiries.
+
+Some changes have been made to the database to enable the latter to function.
+Included in the db/ directory is an update SQL file which should update the
+structure of your DB without losing all your moshes.
+
+
+Expiring Moshes
+---------------
+
+With the addition of mosh expiries, something actually needs to expire them.
+I've added a perl script that can be tailored to your STCM installation and set
+to run at whatever interval you deem fit (every half hour should do the trick).
+
+I did contemplate having the API clean up moshes. But the potential over-head
+could slow down the response and make for bad Ux - hence the cron script. Just
+be sure to point it at the location of your SQLite DB, or give it the connection
+params for your real DB if that's how you're doing things.
+
+

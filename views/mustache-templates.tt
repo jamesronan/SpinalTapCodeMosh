@@ -16,6 +16,7 @@
     <h3>Mosh {{id}}<br>{{created}}</h3>
     <section><h4>Title:</h4>{{subject}}</section>
     <section><h4>Posted by:</h4>{{poster}}</section>
+    <section><h4>Expiry:</h4>{{expiry}}</section>
     <button id="get-raw" class="btn">Raw Mosh</button>
     <div class="mosh">
     <pre>{{data}}</pre>
@@ -24,6 +25,10 @@
     {{/syntax}}
     </div>
 </script>
+<script type="text/x-mustashe-template" id="template-expiry-option">
+<span><input type="radio" name="expiry" value="{{id}}" /></span>
+<label for="{{name}}" class="inline">{{name}}</label>
+</script>
 <script type="text/x-mustashe-template" id="template-new-mosh">
     <form id="moshfrm" name="moshfrm" class="form-horizontal">
     <legend>Create a new mosh</legend>
@@ -31,6 +36,9 @@
     <input type="text" id="subject" name="subject" class="subject" value="">
     <br>
     <textarea name="data"></textarea>
+    <br>
+    <label for="expiry">Mosh Expiry:</label>
+    <span id="expiry"></span>
     <br>
     <label for="syntax">Syntax Highlighting:</label>
     <select name="syntax" id="syntax">

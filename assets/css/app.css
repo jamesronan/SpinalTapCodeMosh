@@ -87,7 +87,17 @@ form span#channels {
 form span#channels span {
     padding: 2px 0px 0px 20px !important;
 }
-
+form span#expiry {
+    display: block;
+    padding: 0px 0px 0px 0px !important;
+    margin: 0px 0px -3px 0px !important;
+}
+form span#expiry label {
+    margin: 0px 20px 0px 0px !important;
+}
+form span#expiry span input {
+    margin: 2px 0px 0px 0px !important;
+}
 #dancefloor {
     margin-left: 290px;
 }
@@ -154,7 +164,7 @@ form span#channels span {
 
 #moshpit h3 {
     position: absolute;
-    top: 0px;
+    top: 15px;
     right: 22px;
     margin: 0px;
     font-size: 14px;
