@@ -294,7 +294,7 @@
         template: Mosh.template('latest-mosh-item'),
         render: function() {
             this.model.attributes.age
-                = moment.utc( this.model.attributes.created ).from(moment.utc());
+                = moment( this.model.attributes.created ).from(moment());
             this.$el.html( this.template( this.model.attributes ) );
             return this;
         },

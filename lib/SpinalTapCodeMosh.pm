@@ -4,6 +4,7 @@ use Dancer::Plugin::Database;
 
 use LWP::Simple qw();
 use Data::UUID;
+use DateTime;
 use HTTP::Status qw(:constants);
 use JSON qw();
 use Digest::SHA1 qw();
@@ -53,10 +54,15 @@ post '/mosh' => sub {
     my %data = map  { $_ => params->{$_} }
                grep { $_ ~~ \@mosh_fields } keys params('body');
 
+    # Set the created datetime to be the local one.
+    my $dt_now = DateTime->now( time_zone => 'local' );
+    $data{created} = $dt_now->ymd . " " . $dt_now->hms;
+
     # We want a unique ID, which isn't as long as a Donkey's cock.
     $data{id}
         = substr Digest::SHA1::sha1_hex( Data::UUID->new->create_str ), 0, 10;
     my $inserted = database->quick_insert('moshes', \%data);
+
 
     my $return_data = { created => $inserted };
     if ($inserted) {
