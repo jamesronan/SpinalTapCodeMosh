@@ -115,7 +115,7 @@ get '/mosh/raw/:id' => sub {
 get  '/mosh/:id'    => sub {
     set 'serializer' => 'JSON';
     my $sth = database->prepare(<<SQL) or die("Bugger: ". database->errstr);
-SELECT m.id, m.poster, m.subject, m.data, m.created, e.name as expiry
+SELECT m.id, m.poster, m.subject, m.data, m.created, m.syntax, e.name as expiry
 FROM     moshes as m
     JOIN expiry as e ON (m.expiry = e.id)
 WHERE m.id = ?
