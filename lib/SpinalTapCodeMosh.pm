@@ -10,7 +10,7 @@ use JSON qw();
 use Digest::SHA1 qw();
 use URI::Escape qw();
 
-our $VERSION = '0.1';
+our $VERSION = '1.0';
 
 post '/irc' => sub {
     set 'serializer' => 'JSON';
