@@ -4,7 +4,7 @@ ALTER TABLE moshes ADD COLUMN expiry INT(3) DEFAULT 1;
 
 CREATE TABLE IF NOT EXISTS expiry (
     id   INT(3),
-    name VARCHAR(25),
+    name VARCHAR(25)
 );
 
 INSERT INTO expiry VALUES (1, 'never');
