@@ -13,7 +13,7 @@ the issues section. I'll look into those in due course. Feel free to raise
 issues for problems you find / features you'd like (PR's are even nicer!)
 
 This application has no affiliation with the band or any orthopedic procedures.
-It is so named due to the components that power it, and it's intended use :).
+It is so named due to the components that power it, and its intended use :).
 
 Prereqs
 -------
