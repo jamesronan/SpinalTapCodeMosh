@@ -327,7 +327,6 @@
         },
         routes: {
             "":         "newMosh",
-            "notfound": "noMosh",
             ":id":      "showMosh",
         },
         newMosh: function() {
@@ -342,13 +341,10 @@
                     Mosh.router.updateMoshPit(moshView);
                 },
                 error: function() {
-                    Mosh.router.navigate('/notfound', true);
+                    var noMoshView = new Mosh.Views.NoMosh;
+                    Mosh.router.updateMoshPit(noMoshView);
                 },
             });
-        },
-        noMosh: function() {
-            var noMoshView = new Mosh.Views.NoMosh;
-            this.updateMoshPit(noMoshView);
         },
         updateMoshPit: function(moshView) {
             var moshPit = $(this.el).find('#moshpit');
