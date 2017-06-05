@@ -1,5 +1,6 @@
 <section id="latest-moshes">
     <a href="/" id="createnewmosh" class="btn">Create New Mosh</a>
+    <button id="show-formatter" class="btn"> JSON Formatter </button>
     <hr>
     <h3>Latest Moshes</h3>
     <ul id="latest-mosh-list"></ul>
@@ -7,4 +8,17 @@
 <section id="dancefloor">
     <h2>Spinal:Tap:Code:Mosh <span>v1.0</span></h2>
     <section id="moshpit"></section>
+
+    <div id="formattool">
+        <h2>JSON Formatting Tool</h2>
+        <p>This tool will format a JSON string to make it easier to read.</p>
+        <p>Enter the API request / response / generic JSON string in the box below and hit
+        'Format'. Magic will happen.</p>
+        <p>This tool can only format valid JSON. If the button turns red, it's not valid JSON.</p>
+        <textarea id="formatter"></textarea>
+        <br>
+        <button id="formatthis" class="btn">Format!</button>
+        <button id="clearformatter" class="btn">Clear</button>
+        <button id="closeformatter" class="btn">Close</button>
+    </div>
 </section>

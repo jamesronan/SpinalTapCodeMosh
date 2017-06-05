@@ -130,6 +130,24 @@ SQL
     return $mosh;
 };
 
+post '/format/json' => sub {
+    set 'serializer' => 'JSON';
+
+    my $json = JSON->new->pretty(1);
+
+    my $formatted_json;
+    eval {
+        $formatted_json = $json->encode(
+            $json->decode( params->{json} )
+        );
+    } or do {
+        status HTTP_UNPROCESSABLE_ENTITY;
+        return { error => $@ };
+    };
+
+    return { formatted => $formatted_json };
+};
+
 any qr{.*} => sub {
     template 'mosh.tt';
 };

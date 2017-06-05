@@ -309,6 +309,7 @@
                 var latestMoshView = new Mosh.Views.LatestMosh({ model: mosh });
                 this.$el.append( latestMoshView.render().el );
             }, this);
+
             return this;
         },
     });
@@ -359,6 +360,69 @@
         },
     });
 
+
+    // Deal with the dirty, tacked-on JSON Formatter. This is horribly hacked in
+    // and not Backbone powered at all. Just some skunky jQuery to get the job
+    // done. This is only in a feature branch, so meh.
+    Mosh.setupFormatter = function() {
+
+        var resetFormatter = function() {
+            $('#formattool textarea').val('');
+            $('#formattool #formatthis').removeClass('btn-success btn-danger');
+        };
+
+        // Open the formatter from the button in the left bar.
+        $('section#latest-moshes #show-formatter').click(function(e) {
+            e.preventDefault();
+            $('div#formattool').addClass('active').fadeIn();
+        });
+
+        // Handle the clear / close buttons.
+        $('#formattool #clearformatter').click(function(e) {
+            e.preventDefault();
+            resetFormatter();
+        });
+        $('#formattool #closeformatter').click(function(e) {
+            e.preventDefault();
+            resetFormatter();
+            $('div#formattool').fadeOut('slow', function(e) {
+                $('#formattool').removeClass('active');
+            });
+        });
+
+        // A little nice flare. If the field is changed, revert the button from
+        // error/success state.
+        var changeHandler = function(e) {
+            $('#formattool #formatthis').removeClass('btn-success btn-danger');
+        };
+        $('#formattool textarea').keypress(changeHandler).change(changeHandler);
+
+        // Handle the actual API call that does the formatting. Again, that's
+        // just a dirty perl JSON->decode->encode. It's just for convenience for
+        // people.
+        $('#formattool #formatthis').click(function(e) {
+            var textArea     = $('#formattool textarea');
+            var formatButton = $(this);
+
+            formatButton.removeClass('btn-success btn-danger');
+
+            $.ajax({
+                type: 'POST',
+                url:  '/format/json',
+                data: {
+                    json: textArea.val(),
+                },
+                success: function(data) {
+                    textArea.val(data.formatted);
+                    formatButton.addClass('btn-success');
+                },
+                error: function() {
+                    formatButton.addClass('btn-danger');
+                },
+            });
+        });
+    };
+
     // This is where the wind-milling starts
     Mosh.jumpIn = function(container) {
         container = $(container);
@@ -366,6 +430,9 @@
         Backbone.history.start({
             pushState: true,
         });
+
+        // Set up the Formatter addon.
+        Mosh.setupFormatter();
 
         // Handle AllTheLinks. Standard Backbone boiler-plate type stuff...
         $(document).on('click', 'a:not([data-bypass])', function(e) {

@@ -152,8 +152,15 @@ form span#expiry span input {
     color: rgba(0,0,0,0.8);
 }
 
+#latest-moshes button#show-formatter,
 #createnewmosh {
+    width: 125px;
     margin: 10px 0px -5px 50px;
+    padding: 3px;
+}
+
+#latest-moshes button#show-formatter {
+    margin-left: 53px;
 }
 
 #moshpit {
@@ -213,5 +220,46 @@ form span#expiry span input {
 #moshpit div.notfoundtext {
     margin: 20px 0px 20px 0px;
 }
+
+#formattool {
+    display: none;
+    position: fixed;
+    width: 0px;
+    height: 600px;
+    left: 250px;
+    top: 0px;
+    padding: 10px;
+    margin: 10px;
+    z-index: 20 !important;
+    color: rgba(0,0,0,0.7);
+    background-color: rgba(167,182,197,0.9);
+    border: 1px solid rgba(120,120,120,1);
+    box-shadow: 3px 3px 5px rgba(0,0,0,0.5);
+}
+
+#formattool.active {
+    width: 815px !important;
+}
+
+#formattool h2 {
+    color: rgba(0,0,0,0.7);
+}
+
+#formattool textarea {
+    margin-top: 40px;
+    height: 400px;
+    background-image: none;
+    clear: both;
+}
+
+
+
+
+
+
+
+
+
+
 
 
