@@ -41,9 +41,12 @@ while (my ($expiry, $before_date) = each(%dates)) {
 }
 
 sub date_previous {
+
+    my $expiry_cutoff_dt = DateTime->now( time_zone => 'local' )->subtract(@_);
+
     return sprintf "%s %s",
-        DateTime->now( time_zone => 'local' )->subtract(@_)->ymd,
-        DateTime->now( time_zone => 'local' )->subtract(@_)->hms;
+        $expiry_cutoff_dt->ymd,
+        $expiry_cutoff_dt->hms;
 }
 
 
